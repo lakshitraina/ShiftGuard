@@ -44,8 +44,8 @@ const ManagerDashboard = () => {
         <div className="space-y-6">
             <div className="flex justify-between items-center">
                 <div>
-                    <h2 className="text-2xl font-bold text-slate-800">Team Leave Requests</h2>
-                    <p className="text-slate-500 mt-1">Manage and respond to employee leave applications</p>
+                    <h2 className="text-2xl font-bold text-slate-800 dark:text-white">Team Leave Requests</h2>
+                    <p className="text-slate-500 dark:text-slate-400 mt-1">Manage and respond to employee leave applications</p>
                 </div>
             </div>
 
@@ -57,11 +57,11 @@ const ManagerDashboard = () => {
             )}
 
             {/* Pending Requests */}
-            <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                <div className="px-6 py-5 border-b border-slate-200 flex items-center justify-between bg-slate-50">
+            <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm dark:shadow-none border border-slate-200 dark:border-slate-800 overflow-hidden">
+                <div className="px-6 py-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-900/50">
                     <div className="flex items-center gap-2">
                         <CheckSquare className="text-blue-500" size={20} />
-                        <h3 className="text-lg font-semibold text-slate-800">Action Required</h3>
+                        <h3 className="text-lg font-semibold text-slate-800 dark:text-white">Action Required</h3>
                     </div>
                     <span className="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-1 rounded-full">{pendingLeaves.length} pending</span>
                 </div>
@@ -69,7 +69,7 @@ const ManagerDashboard = () => {
                 <div className="p-6">
                     {pendingLeaves.length === 0 ? (
                         <div className="text-center py-8">
-                            <p className="text-slate-500 font-medium tracking-wide">All caught up! No pending leave requests.</p>
+                            <p className="text-slate-500 dark:text-slate-400 font-medium tracking-wide">All caught up! No pending leave requests.</p>
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -87,20 +87,20 @@ const ManagerDashboard = () => {
             </div>
 
             {/* Past Requests Summary */}
-            <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden mt-8">
-                <div className="px-6 py-5 border-b border-slate-200">
-                    <h3 className="text-lg font-semibold text-slate-800">Recently Processed</h3>
+            <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm dark:shadow-none border border-slate-200 dark:border-slate-800 overflow-hidden mt-8">
+                <div className="px-6 py-5 border-b border-slate-200 dark:border-slate-800">
+                    <h3 className="text-lg font-semibold text-slate-800 dark:text-white">Recently Processed</h3>
                 </div>
                 <div className="p-6">
                     {pastLeaves.length === 0 ? (
-                        <div className="text-center py-8 text-slate-500">No processed leaves to show.</div>
+                        <div className="text-center py-8 text-slate-500 dark:text-slate-400">No processed leaves to show.</div>
                     ) : (
                         <div className="space-y-3">
                             {pastLeaves.slice(0, 5).map(leave => (
-                                <div key={leave._id} className="flex justify-between items-center p-4 hover:bg-slate-50 rounded-lg border border-slate-100 transition-colors">
+                                <div key={leave._id} className="flex justify-between items-center p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-lg border border-slate-100 dark:border-slate-800 transition-colors">
                                     <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
-                                        <p className="font-medium text-slate-800 w-40 truncate">{leave.employeeId?.name || 'Unknown'}</p>
-                                        <p className="text-sm text-slate-500">{new Date(leave.startDate).toLocaleDateString()} - {new Date(leave.endDate).toLocaleDateString()}</p>
+                                        <p className="font-medium text-slate-800 dark:text-white w-40 truncate">{leave.employeeId?.name || 'Unknown'}</p>
+                                        <p className="text-sm text-slate-500 dark:text-slate-400">{new Date(leave.startDate).toLocaleDateString()} - {new Date(leave.endDate).toLocaleDateString()}</p>
                                     </div>
                                     <span className={`px-2.5 py-1 rounded-full text-xs font-semibold capitalize border ${leave.status === 'approved' ? 'bg-green-100 text-green-800 border-green-200' : 'bg-red-100 text-red-800 border-red-200'
                                         }`}>

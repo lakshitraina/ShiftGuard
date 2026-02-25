@@ -55,8 +55,8 @@ const EmployeeDashboard = () => {
         <div className="space-y-6">
             <div className="flex justify-between items-center">
                 <div>
-                    <h2 className="text-2xl font-bold text-slate-800">My Leave Dashboard</h2>
-                    <p className="text-slate-500 mt-1">Welcome back, {user?.name}</p>
+                    <h2 className="text-2xl font-bold text-slate-800 dark:text-white">My Leave Dashboard</h2>
+                    <p className="text-slate-500 dark:text-slate-400 mt-1">Welcome back, {user?.name}</p>
                 </div>
                 <button
                     onClick={() => setShowApplyForm(!showApplyForm)}
@@ -75,51 +75,51 @@ const EmployeeDashboard = () => {
 
             {/* Summary Stats */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <StatCard icon={<CalendarIcon className="text-blue-500" />} title="Total Leaves" value={leaves.length} bg="bg-blue-50" />
-                <StatCard icon={<Clock className="text-yellow-500" />} title="Pending" value={getStatusCount('pending')} bg="bg-yellow-50" />
-                <StatCard icon={<CheckCircle className="text-green-500" />} title="Approved" value={getStatusCount('approved')} bg="bg-green-50" />
-                <StatCard icon={<XCircle className="text-red-500" />} title="Rejected" value={getStatusCount('rejected')} bg="bg-red-50" />
+                <StatCard icon={<CalendarIcon className="text-blue-500" />} title="Total Leaves" value={leaves.length} bg="bg-blue-50 dark:bg-blue-900/30" />
+                <StatCard icon={<Clock className="text-yellow-500" />} title="Pending" value={getStatusCount('pending')} bg="bg-yellow-50 dark:bg-yellow-900/30" />
+                <StatCard icon={<CheckCircle className="text-green-500" />} title="Approved" value={getStatusCount('approved')} bg="bg-green-50 dark:bg-green-900/30" />
+                <StatCard icon={<XCircle className="text-red-500" />} title="Rejected" value={getStatusCount('rejected')} bg="bg-red-50 dark:bg-red-900/30" />
             </div>
 
             {/* Apply Leave Form */}
             {showApplyForm && (
-                <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden p-6 animate-in slide-in-from-top-4 duration-300">
-                    <h3 className="text-lg font-semibold text-slate-800 mb-4 flex items-center gap-2">
+                <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm dark:shadow-none border border-slate-200 dark:border-slate-800 overflow-hidden p-6 animate-in slide-in-from-top-4 duration-300">
+                    <h3 className="text-lg font-semibold text-slate-800 dark:text-white mb-4 flex items-center gap-2">
                         <CalendarIcon className="text-blue-500" size={20} /> New Leave Application
                     </h3>
                     <form onSubmit={handleApplyLeave} className="space-y-4 max-w-2xl">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">Start Date</label>
+                                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Start Date</label>
                                 <input
                                     type="date"
                                     required
                                     min={new Date().toISOString().split('T')[0]}
                                     value={newLeave.startDate}
                                     onChange={(e) => setNewLeave({ ...newLeave, startDate: e.target.value })}
-                                    className="w-full border-slate-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 border"
+                                    className="w-full border-slate-300 dark:border-slate-700 bg-transparent dark:text-white rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 border"
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-slate-700 mb-1">End Date</label>
+                                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">End Date</label>
                                 <input
                                     type="date"
                                     required
                                     min={newLeave.startDate || new Date().toISOString().split('T')[0]}
                                     value={newLeave.endDate}
                                     onChange={(e) => setNewLeave({ ...newLeave, endDate: e.target.value })}
-                                    className="w-full border-slate-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 border"
+                                    className="w-full border-slate-300 dark:border-slate-700 bg-transparent dark:text-white rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 border"
                                 />
                             </div>
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-1">Reason for Leave</label>
+                            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Reason for Leave</label>
                             <textarea
                                 required
                                 rows={3}
                                 value={newLeave.reason}
                                 onChange={(e) => setNewLeave({ ...newLeave, reason: e.target.value })}
-                                className="w-full border-slate-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 border"
+                                className="w-full border-slate-300 dark:border-slate-700 bg-transparent dark:text-white rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 border"
                                 placeholder="Please describe the reason for your leave request..."
                             />
                         </div>
@@ -137,9 +137,9 @@ const EmployeeDashboard = () => {
             )}
 
             {/* Leave History */}
-            <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-                <div className="px-6 py-5 border-b border-slate-200">
-                    <h3 className="text-lg font-semibold text-slate-800">Leave History</h3>
+            <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm dark:shadow-none border border-slate-200 dark:border-slate-800 overflow-hidden">
+                <div className="px-6 py-5 border-b border-slate-200 dark:border-slate-800">
+                    <h3 className="text-lg font-semibold text-slate-800 dark:text-white">Leave History</h3>
                 </div>
                 <div className="p-6">
                     {leaves.length === 0 ? (
@@ -164,13 +164,13 @@ const EmployeeDashboard = () => {
 };
 
 const StatCard = ({ icon, title, value, bg }) => (
-    <div className="bg-white rounded-xl p-5 shadow-sm border border-slate-200 flex items-center gap-4">
+    <div className="bg-white dark:bg-slate-900 rounded-xl p-5 shadow-sm dark:shadow-none border border-slate-200 dark:border-slate-800 flex items-center gap-4">
         <div className={`w-12 h-12 rounded-full ${bg} flex items-center justify-center`}>
             {icon}
         </div>
         <div>
-            <p className="text-sm font-medium text-slate-500">{title}</p>
-            <p className="text-2xl font-bold text-slate-800">{value}</p>
+            <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{title}</p>
+            <p className="text-2xl font-bold text-slate-800 dark:text-white">{value}</p>
         </div>
     </div>
 );

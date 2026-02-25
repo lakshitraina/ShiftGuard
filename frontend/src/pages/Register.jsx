@@ -47,21 +47,21 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 flex flex-col justify-center sm:px-6 lg:px-8 py-12">
+        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col justify-center sm:px-6 lg:px-8 py-12 transition-colors duration-200">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                <div className="flex justify-center mx-auto text-blue-600 bg-blue-100 w-16 h-16 rounded-full items-center">
+                <div className="flex justify-center mx-auto text-blue-600 bg-blue-100 dark:bg-blue-900/30 w-16 h-16 rounded-full items-center">
                     <UserPlus size={32} />
                 </div>
-                <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-900 tracking-tight">
+                <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                     Create an account
                 </h2>
-                <p className="mt-2 text-center text-sm text-slate-600">
+                <p className="mt-2 text-center text-sm text-slate-600 dark:text-slate-400">
                     Join the Leave Management System
                 </p>
             </div>
 
             <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-                <div className="bg-white py-8 px-4 shadow-xl shadow-slate-200 sm:rounded-2xl sm:px-10 border border-slate-100">
+                <div className="bg-white dark:bg-slate-900 py-8 px-4 shadow-xl shadow-slate-200 dark:shadow-none sm:rounded-2xl sm:px-10 border border-slate-100 dark:border-slate-800">
 
                     {error && (
                         <div className="mb-6 bg-red-50 border-l-4 border-red-500 p-4 rounded-md flex items-start">
@@ -72,10 +72,10 @@ const Register = () => {
 
                     <form className="space-y-5" onSubmit={handleSubmit}>
                         <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
+                            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Full Name</label>
                             <div className="relative rounded-md shadow-sm">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <User className="h-5 w-5 text-slate-400" />
+                                    <User className="h-5 w-5 text-slate-400 dark:text-slate-500" />
                                 </div>
                                 <input
                                     type="text"
@@ -83,17 +83,17 @@ const Register = () => {
                                     required
                                     value={name}
                                     onChange={onChange}
-                                    className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-slate-300 rounded-lg py-2.5 bg-slate-50 border outline-none transition-colors"
+                                    className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-slate-300 dark:border-slate-700 rounded-lg py-2.5 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white border outline-none transition-colors dark:placeholder-slate-500"
                                     placeholder="John Doe"
                                 />
                             </div>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-1">Email address</label>
+                            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Email address</label>
                             <div className="relative rounded-md shadow-sm">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <Mail className="h-5 w-5 text-slate-400" />
+                                    <Mail className="h-5 w-5 text-slate-400 dark:text-slate-500" />
                                 </div>
                                 <input
                                     type="email"
@@ -101,17 +101,17 @@ const Register = () => {
                                     required
                                     value={email}
                                     onChange={onChange}
-                                    className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-slate-300 rounded-lg py-2.5 bg-slate-50 border outline-none transition-colors"
+                                    className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-slate-300 dark:border-slate-700 rounded-lg py-2.5 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white border outline-none transition-colors dark:placeholder-slate-500"
                                     placeholder="you@company.com"
                                 />
                             </div>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-1">Password</label>
+                            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Password</label>
                             <div className="relative rounded-md shadow-sm">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <Key className="h-5 w-5 text-slate-400" />
+                                    <Key className="h-5 w-5 text-slate-400 dark:text-slate-500" />
                                 </div>
                                 <input
                                     type="password"
@@ -119,23 +119,23 @@ const Register = () => {
                                     required
                                     value={password}
                                     onChange={onChange}
-                                    className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-slate-300 rounded-lg py-2.5 bg-slate-50 border outline-none transition-colors"
+                                    className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-slate-300 dark:border-slate-700 rounded-lg py-2.5 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white border outline-none transition-colors dark:placeholder-slate-500"
                                     placeholder="••••••••"
                                 />
                             </div>
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-slate-700 mb-1">Role</label>
+                            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Role</label>
                             <div className="relative rounded-md shadow-sm">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <Shield className="h-5 w-5 text-slate-400" />
+                                    <Shield className="h-5 w-5 text-slate-400 dark:text-slate-500" />
                                 </div>
                                 <select
                                     name="role"
                                     value={role}
                                     onChange={onChange}
-                                    className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-slate-300 rounded-lg py-2.5 bg-slate-50 border outline-none transition-colors"
+                                    className="focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 sm:text-sm border-slate-300 dark:border-slate-700 rounded-lg py-2.5 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white border outline-none transition-colors"
                                 >
                                     <option value="employee">Employee</option>
                                     <option value="manager">Manager</option>
@@ -156,7 +156,7 @@ const Register = () => {
                     </form>
 
                     <div className="mt-6 text-center text-sm">
-                        <span className="text-slate-600">Already have an account? </span>
+                        <span className="text-slate-600 dark:text-slate-400">Already have an account? </span>
                         <Link to="/login" className="font-medium text-blue-600 hover:text-blue-500 transition-colors">
                             Sign in here
                         </Link>

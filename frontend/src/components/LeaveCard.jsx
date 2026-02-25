@@ -23,15 +23,15 @@ const LeaveCard = ({ leave, isManager, onUpdateStatus }) => {
     }
 
     return (
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition-shadow">
+        <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm dark:shadow-none border border-slate-200 dark:border-slate-800 overflow-hidden hover:shadow-md dark:hover:shadow-slate-800/50 transition-shadow">
             <div className="p-5">
                 <div className="flex justify-between items-start mb-4">
                     <div>
                         {isManager && leave.employeeId && (
-                            <div className="flex items-center gap-2 mb-2 text-slate-700 font-medium">
+                            <div className="flex items-center gap-2 mb-2 text-slate-700 dark:text-slate-300 font-medium">
                                 <UserIcon size={16} className="text-blue-500" />
                                 <span>{leave.employeeId.name}</span>
-                                <span className="text-xs text-slate-400 font-normal">({leave.employeeId.email})</span>
+                                <span className="text-xs text-slate-400 dark:text-slate-500 font-normal">({leave.employeeId.email})</span>
                             </div>
                         )}
                         <div className="flex items-center gap-2">
@@ -52,25 +52,25 @@ const LeaveCard = ({ leave, isManager, onUpdateStatus }) => {
                 </div>
 
                 <div className="space-y-3">
-                    <div className="flex items-center gap-4 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                    <div className="flex items-center gap-4 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg border border-slate-100 dark:border-slate-700">
                         <div>
-                            <p className="text-xs text-slate-500 font-medium uppercase tracking-wider mb-1">Duration</p>
-                            <p className="text-sm font-semibold text-slate-800">
-                                {formatDate(leave.startDate)} <span className="text-slate-400 mx-1">→</span> {formatDate(leave.endDate)}
+                            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider mb-1">Duration</p>
+                            <p className="text-sm font-semibold text-slate-800 dark:text-slate-200">
+                                {formatDate(leave.startDate)} <span className="text-slate-400 dark:text-slate-500 mx-1">→</span> {formatDate(leave.endDate)}
                             </p>
                         </div>
                     </div>
 
                     <div>
-                        <p className="text-xs text-slate-500 font-medium uppercase tracking-wider mb-1">Reason</p>
-                        <p className="text-sm text-slate-700 bg-slate-50 p-3 rounded-lg border border-slate-100">
+                        <p className="text-xs text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider mb-1">Reason</p>
+                        <p className="text-sm text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/50 p-3 rounded-lg border border-slate-100 dark:border-slate-700">
                             {leave.reason}
                         </p>
                     </div>
                 </div>
 
                 {isManager && leave.status === 'pending' && (
-                    <div className="mt-6 flex gap-3 pt-4 border-t border-slate-100">
+                    <div className="mt-6 flex gap-3 pt-4 border-t border-slate-100 dark:border-slate-700/50">
                         <button
                             onClick={() => onUpdateStatus(leave._id, 'approved')}
                             className="flex-1 bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition-colors text-sm"
@@ -79,7 +79,7 @@ const LeaveCard = ({ leave, isManager, onUpdateStatus }) => {
                         </button>
                         <button
                             onClick={() => onUpdateStatus(leave._id, 'rejected')}
-                            className="flex-1 bg-red-50 border border-red-200 text-red-600 hover:bg-red-100 font-medium py-2 px-4 rounded-lg transition-colors text-sm"
+                            className="flex-1 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/50 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/40 font-medium py-2 px-4 rounded-lg transition-colors text-sm"
                         >
                             Reject
                         </button>

@@ -61,8 +61,8 @@ const AdminDashboard = () => {
         <div className="space-y-6">
             <div className="flex justify-between items-center">
                 <div>
-                    <h2 className="text-2xl font-bold text-slate-800">User Management</h2>
-                    <p className="text-slate-500 mt-1">Manage system users and their access roles</p>
+                    <h2 className="text-2xl font-bold text-slate-800 dark:text-white">User Management</h2>
+                    <p className="text-slate-500 dark:text-slate-400 mt-1">Manage system users and their access roles</p>
                 </div>
             </div>
 
@@ -73,10 +73,10 @@ const AdminDashboard = () => {
                 </div>
             )}
 
-            <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+            <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm dark:shadow-none border border-slate-200 dark:border-slate-800 overflow-hidden">
                 <div className="overflow-x-auto">
-                    <table className="w-full text-left text-sm text-slate-600">
-                        <thead className="bg-slate-50 text-slate-700 uppercase font-medium border-b border-slate-200">
+                    <table className="w-full text-left text-sm text-slate-600 dark:text-slate-300">
+                        <thead className="bg-slate-50 dark:bg-slate-900/50 text-slate-700 dark:text-slate-300 uppercase font-medium border-b border-slate-200 dark:border-slate-800">
                             <tr>
                                 <th scope="col" className="px-6 py-4">Name</th>
                                 <th scope="col" className="px-6 py-4">Email</th>
@@ -84,32 +84,32 @@ const AdminDashboard = () => {
                                 <th scope="col" className="px-6 py-4 text-center">Actions</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-100">
+                        <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
                             {users.map((user) => (
-                                <tr key={user._id} className="hover:bg-slate-50/50 transition-colors">
-                                    <td className="px-6 py-4 font-medium text-slate-900 border-l-2 border-transparent hover:border-blue-500">
+                                <tr key={user._id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
+                                    <td className="px-6 py-4 font-medium text-slate-900 dark:text-white border-l-2 border-transparent hover:border-blue-500">
                                         {user.name}
                                     </td>
-                                    <td className="px-6 py-4 text-slate-500">{user.email}</td>
+                                    <td className="px-6 py-4 text-slate-500 dark:text-slate-400">{user.email}</td>
                                     <td className="px-6 py-4">
                                         {editingUserId === user._id ? (
                                             <div className="flex items-center gap-2">
                                                 <select
                                                     value={editingRole}
                                                     onChange={(e) => setEditingRole(e.target.value)}
-                                                    className="bg-white border border-slate-300 text-slate-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"
+                                                    className="bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"
                                                 >
                                                     <option value="employee">Employee</option>
                                                     <option value="manager">Manager</option>
                                                     <option value="admin">Admin</option>
                                                 </select>
                                                 <button onClick={() => saveRole(user._id)} className="text-green-600 font-semibold px-2 hover:underline">Save</button>
-                                                <button onClick={cancelEdit} className="text-slate-500 px-2 hover:underline">Cancel</button>
+                                                <button onClick={cancelEdit} className="text-slate-500 dark:text-slate-400 px-2 hover:underline">Cancel</button>
                                             </div>
                                         ) : (
                                             <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold capitalize border ${user.role === 'admin' ? 'bg-purple-100 text-purple-800 border-purple-200' :
-                                                    user.role === 'manager' ? 'bg-blue-100 text-blue-800 border-blue-200' :
-                                                        'bg-slate-100 text-slate-800 border-slate-200'
+                                                user.role === 'manager' ? 'bg-blue-100 text-blue-800 border-blue-200' :
+                                                    'bg-slate-100 text-slate-800 border-slate-200 dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700'
                                                 }`}>
                                                 {user.role === 'admin' && <Shield size={12} className="mr-1" />}
                                                 {user.role === 'manager' && <Users size={12} className="mr-1" />}
@@ -122,14 +122,14 @@ const AdminDashboard = () => {
                                             <>
                                                 <button
                                                     onClick={() => startEdit(user)}
-                                                    className="text-blue-500 hover:text-blue-700 hover:bg-blue-50 p-2 rounded-full transition-colors focus:ring-2 focus:outline-none focus:ring-blue-300"
+                                                    className="text-blue-500 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/30 p-2 rounded-full transition-colors focus:ring-2 focus:outline-none focus:ring-blue-300"
                                                     title="Edit Role"
                                                 >
                                                     <Edit2 size={18} />
                                                 </button>
                                                 <button
                                                     onClick={() => handleDelete(user._id)}
-                                                    className="text-red-500 hover:text-red-700 hover:bg-red-50 p-2 rounded-full transition-colors focus:ring-2 focus:outline-none focus:ring-red-300"
+                                                    className="text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/30 p-2 rounded-full transition-colors focus:ring-2 focus:outline-none focus:ring-red-300"
                                                     title="Delete User"
                                                 >
                                                     <Trash2 size={18} />
@@ -142,7 +142,7 @@ const AdminDashboard = () => {
                         </tbody>
                     </table>
                     {users.length === 0 && (
-                        <div className="text-center py-10 text-slate-500">
+                        <div className="text-center py-10 text-slate-500 dark:text-slate-400">
                             No users found in the system.
                         </div>
                     )}

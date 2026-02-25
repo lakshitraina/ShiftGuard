@@ -5,7 +5,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 // Components
 import Navbar from './components/Navbar';
-import Sidebar from './components/Sidebar';
+import { ThemeProvider } from './context/ThemeContext';
 
 // Pages
 import Login from './pages/Login';
@@ -16,16 +16,11 @@ import AdminDashboard from './pages/AdminDashboard';
 
 const Layout = ({ children }) => {
     return (
-        <div className="flex h-screen overflow-hidden bg-slate-50">
-            <Sidebar />
-            <div className="flex flex-col flex-1 overflow-hidden">
-                <Navbar />
-                <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
-                    <div className="max-w-7xl mx-auto h-full">
-                        {children}
-                    </div>
-                </main>
-            </div>
+        <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-200">
+            <Navbar />
+            <main className="flex-1 w-full max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+                {children}
+            </main>
         </div>
     );
 };
@@ -88,9 +83,11 @@ function AppContent() {
 
 function App() {
     return (
-        <AuthProvider>
-            <AppContent />
-        </AuthProvider>
+        <ThemeProvider>
+            <AuthProvider>
+                <AppContent />
+            </AuthProvider>
+        </ThemeProvider>
     );
 }
 
