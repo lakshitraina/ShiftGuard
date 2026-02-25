@@ -5,6 +5,10 @@ import connectDB from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import leaveRoutes from './routes/leaveRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import reimbursementRoutes from './routes/reimbursementRoutes.js';
+import attendanceRoutes from './routes/attendanceRoutes.js';
+import payslipRoutes from './routes/payslipRoutes.js';
+import path from 'path';
 
 dotenv.config();
 
@@ -20,9 +24,15 @@ app.get('/', (req, res) => {
     res.send('API is running...');
 });
 
+// Serve uploaded files statically
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
+
 app.use('/api/auth', authRoutes);
 app.use('/api/leave', leaveRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/reimbursements', reimbursementRoutes);
+app.use('/api/attendance', attendanceRoutes);
+app.use('/api/payslips', payslipRoutes);
 
 const PORT = process.env.PORT || 5000;
 

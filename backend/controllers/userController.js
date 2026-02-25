@@ -12,6 +12,18 @@ export const getUsers = async (req, res) => {
     }
 };
 
+// @desc    Get all employees
+// @route   GET /api/users/employees
+// @access  Private (Manager/Admin)
+export const getEmployees = async (req, res) => {
+    try {
+        const employees = await User.find({ role: 'employee' }).select('-password').sort({ createdAt: -1 });
+        res.json(employees);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 // @desc    Update user role
 // @route   PUT /api/users/:id/role
 // @access  Private (Admin)

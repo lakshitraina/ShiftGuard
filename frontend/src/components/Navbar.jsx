@@ -15,74 +15,89 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 sticky top-0 z-50 transition-colors duration-200">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between items-center h-16">
+        <nav className="bg-[#f8f9fa] dark:bg-slate-950 top-0 z-50 py-4 px-4 sm:px-6 lg:px-8 transition-colors duration-200">
+            <div className="max-w-7xl mx-auto flex justify-between items-center relative">
 
-                    {/* Brand */}
-                    <div className="flex items-center gap-3">
-                        <div className="bg-blue-600 p-2 rounded-lg">
-                            <Calendar size={20} className="text-white" />
-                        </div>
-                        <span className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
-                            ShiftGuard
-                        </span>
+                {/* Brand */}
+                <div className="flex items-center gap-2">
+                    <span className="text-2xl font-extrabold text-brand-600 dark:text-brand-400 tracking-tight flex items-center">
+                        Shift<span className="text-slate-900 dark:text-white font-bold">Guard</span>
+                    </span>
+                </div>
+
+                {/* Navigation - Centered Pill (Only if logged in) */}
+                {user && (
+                    <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 bg-white dark:bg-slate-900 shadow-soft dark:shadow-none rounded-full px-6 py-2.5 items-center gap-6 border border-slate-100 dark:border-slate-800">
+                        {user.role === 'admin' && (
+                            <>
+                                <Link to="/admin" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">Users</Link>
+                                <Link to="/admin/reimbursements" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">Reimbursements</Link>
+                            </>
+                        )}
+                        {user.role === 'manager' && (
+                            <>
+                                <Link to="/manager" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors"><Calendar size={16} /> Team Leaves</Link>
+                                <Link to="/manager/reimbursements" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">Reimbursements</Link>
+                                <Link to="/manager/payslips" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">Payslips</Link>
+                            </>
+                        )}
+                        {user.role === 'employee' && (
+                            <>
+                                <Link to="/employee" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors"><Calendar size={16} /> My Leaves</Link>
+                                <Link to="/employee/reimbursements" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">Reimbursements</Link>
+                                <Link to="/employee/attendance" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">Attendance</Link>
+                                <Link to="/employee/payslips" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">Payslips</Link>
+                            </>
+                        )}
                     </div>
+                )}
 
-                    {/* Navigation - Desktop (Only if logged in) */}
-                    {user && (
-                        <div className="hidden md:flex items-center space-x-8">
-                            {user.role === 'admin' && (
-                                <Link to="/admin" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors">Users</Link>
-                            )}
-                            {user.role === 'manager' && (
-                                <Link to="/manager" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors">Team Leaves</Link>
-                            )}
-                            {user.role === 'employee' && (
-                                <Link to="/employee" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors">My Leaves</Link>
-                            )}
-                        </div>
-                    )}
+                {/* Right Side Actions */}
+                <div className="flex items-center gap-4">
 
-                    {/* Right Side Actions */}
-                    <div className="flex items-center gap-4">
-
-                        {/* Theme Toggle */}
+                    {/* Theme Toggle & Notifications - Light mode focus, keeping toggle for functionality if needed but styling it light */}
+                    <div className="flex items-center gap-3 text-slate-400 dark:text-slate-500">
+                        <button className="hover:text-slate-700 dark:hover:text-slate-300 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" /><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" /></svg>
+                        </button>
                         <button
                             onClick={toggleTheme}
-                            className="p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                            className="hover:text-slate-700 dark:hover:text-slate-300 transition-colors hidden sm:block"
                             aria-label="Toggle dark mode"
                         >
                             {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
                         </button>
-
-                        {/* Profile Dropdown logic (Only if logged in) */}
-                        {user ? (
-                            <div className="flex items-center gap-3 border-l border-slate-200 dark:border-slate-700 pl-4 ml-2">
-                                <div className="hidden sm:flex flex-col items-end">
-                                    <span className="text-sm font-semibold text-slate-800 dark:text-slate-200">{user.name}</span>
-                                    <span className="text-xs text-slate-500 dark:text-slate-400 capitalize">{user.role}</span>
-                                </div>
-                                <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800">
-                                    <UserIcon size={18} />
-                                </div>
-                                <button
-                                    onClick={handleLogout}
-                                    className="ml-2 p-2 text-slate-500 dark:text-slate-400 hover:text-red-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
-                                    title="Logout"
-                                >
-                                    <LogOut size={20} />
-                                </button>
-                            </div>
-                        ) : (
-                            <div className="flex items-center gap-2 border-l border-slate-200 dark:border-slate-700 pl-4 ml-2">
-                                <Link to="/login" className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-lg transition-colors">Log in</Link>
-                                <Link to="/register" className="text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors shadow-sm">Sign up</Link>
-                            </div>
-                        )}
                     </div>
 
+                    {/* Profile Dropdown logic (Only if logged in) */}
+                    {user ? (
+                        <div className="flex items-center gap-3 bg-white dark:bg-slate-900 shadow-soft dark:shadow-none rounded-full pl-2 pr-4 py-1.5 border border-slate-100 dark:border-slate-800">
+                            <div className="flex items-center gap-2">
+                                <div className="w-8 h-8 rounded-full overflow-hidden bg-slate-200 dark:bg-slate-700 shrink-0">
+                                    <img src={`https://ui-avatars.com/api/?name=${user.name}&background=f1f5f9&color=0f172a`} alt="Avatar" className="w-full h-full object-cover dark:opacity-80" />
+                                </div>
+                                <div className="hidden sm:flex flex-col">
+                                    <span className="text-sm font-semibold text-slate-800 dark:text-slate-100 leading-tight">{user.name}</span>
+                                    <span className="text-[10px] text-slate-400 dark:text-slate-500 uppercase tracking-wider font-semibold">{user.role}</span>
+                                </div>
+                            </div>
+                            <div className="w-px h-6 bg-slate-200 dark:bg-slate-700 mx-1 hidden sm:block"></div>
+                            <button
+                                onClick={handleLogout}
+                                className="text-slate-400 dark:text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-colors"
+                                title="Logout"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                            </button>
+                        </div>
+                    ) : (
+                        <div className="flex items-center gap-2">
+                            <Link to="/login" className="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white px-4 py-2 transition-colors">Log in</Link>
+                            <Link to="/register" className="text-sm font-semibold bg-brand-500 hover:bg-brand-600 text-white px-5 py-2.5 rounded-full transition-colors shadow-sm dark:shadow-none">Sign up</Link>
+                        </div>
+                    )}
                 </div>
+
             </div>
         </nav>
     );

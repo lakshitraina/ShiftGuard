@@ -13,6 +13,11 @@ import Register from './pages/Register';
 import EmployeeDashboard from './pages/EmployeeDashboard';
 import ManagerDashboard from './pages/ManagerDashboard';
 import AdminDashboard from './pages/AdminDashboard';
+import EmployeeReimbursements from './pages/EmployeeReimbursements';
+import ManagerReimbursements from './pages/ManagerReimbursements';
+import EmployeeAttendance from './pages/EmployeeAttendance';
+import EmployeePayslips from './pages/EmployeePayslips';
+import ManagerPayslips from './pages/ManagerPayslips';
 
 const Layout = ({ children }) => {
     return (
@@ -58,6 +63,31 @@ function AppContent() {
                         }
                     />
                     <Route
+                        path="/employee/reimbursements"
+                        element={
+                            <ProtectedRoute roles={['employee']}>
+                                <Layout><EmployeeReimbursements /></Layout>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/employee/attendance"
+                        element={
+                            <ProtectedRoute roles={['employee']}>
+                                <Layout><EmployeeAttendance /></Layout>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/employee/payslips"
+                        element={
+                            <ProtectedRoute roles={['employee']}>
+                                <Layout><EmployeePayslips /></Layout>
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    <Route
                         path="/manager"
                         element={
                             <ProtectedRoute roles={['manager']}>
@@ -66,10 +96,35 @@ function AppContent() {
                         }
                     />
                     <Route
+                        path="/manager/reimbursements"
+                        element={
+                            <ProtectedRoute roles={['manager', 'admin']}>
+                                <Layout><ManagerReimbursements /></Layout>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/manager/payslips"
+                        element={
+                            <ProtectedRoute roles={['manager', 'admin']}>
+                                <Layout><ManagerPayslips /></Layout>
+                            </ProtectedRoute>
+                        }
+                    />
+
+                    <Route
                         path="/admin"
                         element={
                             <ProtectedRoute roles={['admin']}>
                                 <Layout><AdminDashboard /></Layout>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin/reimbursements"
+                        element={
+                            <ProtectedRoute roles={['admin']}>
+                                <Layout><ManagerReimbursements /></Layout>
                             </ProtectedRoute>
                         }
                     />

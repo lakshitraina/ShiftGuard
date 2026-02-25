@@ -58,61 +58,66 @@ const AdminDashboard = () => {
     if (loading) return <div className="p-8 text-center text-slate-500">Loading users...</div>;
 
     return (
-        <div className="space-y-6">
-            <div className="flex justify-between items-center">
+        <div className="space-y-8">
+            <div className="flex justify-between items-center bg-white dark:bg-slate-900 p-6 rounded-3xl shadow-soft dark:shadow-none border border-slate-100 dark:border-slate-800 flex-wrap gap-4">
                 <div>
-                    <h2 className="text-2xl font-bold text-slate-800 dark:text-white">User Management</h2>
-                    <p className="text-slate-500 dark:text-slate-400 mt-1">Manage system users and their access roles</p>
+                    <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">User Management</h2>
+                    <p className="text-slate-500 dark:text-slate-400 mt-1 font-medium">Manage system users and their access roles</p>
                 </div>
             </div>
 
             {error && (
-                <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-md flex items-start">
-                    <AlertCircle className="h-5 w-5 text-red-500 mr-2 mt-0.5" />
-                    <p className="text-sm text-red-700">{error}</p>
+                <div className="bg-red-50 border-l-4 border-accent-red p-4 rounded-xl flex items-start shadow-sm">
+                    <AlertCircle className="h-5 w-5 text-accent-red mr-2 mt-0.5" />
+                    <p className="text-sm font-semibold text-red-700">{error}</p>
                 </div>
             )}
 
-            <div className="bg-white dark:bg-slate-900 rounded-xl shadow-sm dark:shadow-none border border-slate-200 dark:border-slate-800 overflow-hidden">
+            <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-soft dark:shadow-none border border-slate-100 dark:border-slate-800 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-left text-sm text-slate-600 dark:text-slate-300">
-                        <thead className="bg-slate-50 dark:bg-slate-900/50 text-slate-700 dark:text-slate-300 uppercase font-medium border-b border-slate-200 dark:border-slate-800">
+                        <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase font-bold tracking-widest text-[10px] border-b border-slate-100 dark:border-slate-800">
                             <tr>
-                                <th scope="col" className="px-6 py-4">Name</th>
-                                <th scope="col" className="px-6 py-4">Email</th>
-                                <th scope="col" className="px-6 py-4">Current Role</th>
-                                <th scope="col" className="px-6 py-4 text-center">Actions</th>
+                                <th scope="col" className="px-6 py-5 rounded-tl-3xl">Name</th>
+                                <th scope="col" className="px-6 py-5">Email</th>
+                                <th scope="col" className="px-6 py-5">Current Role</th>
+                                <th scope="col" className="px-6 py-5 text-center">Actions</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                        <tbody className="divide-y divide-slate-50 dark:divide-slate-800/50">
                             {users.map((user) => (
-                                <tr key={user._id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
-                                    <td className="px-6 py-4 font-medium text-slate-900 dark:text-white border-l-2 border-transparent hover:border-blue-500">
-                                        {user.name}
+                                <tr key={user._id} className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+                                    <td className="px-6 py-4 font-bold text-slate-900 dark:text-white">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-8 h-8 rounded-full overflow-hidden bg-slate-200 dark:bg-slate-700 shrink-0">
+                                                <img src={`https://ui-avatars.com/api/?name=${user.name}&background=f1f5f9&color=0f172a`} alt="Avatar" className="w-full h-full object-cover dark:opacity-80" />
+                                            </div>
+                                            {user.name}
+                                        </div>
                                     </td>
-                                    <td className="px-6 py-4 text-slate-500 dark:text-slate-400">{user.email}</td>
+                                    <td className="px-6 py-4 font-medium text-slate-500 dark:text-slate-400">{user.email}</td>
                                     <td className="px-6 py-4">
                                         {editingUserId === user._id ? (
                                             <div className="flex items-center gap-2">
                                                 <select
                                                     value={editingRole}
                                                     onChange={(e) => setEditingRole(e.target.value)}
-                                                    className="bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2"
+                                                    className="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white text-xs font-bold uppercase tracking-widest rounded-xl focus:ring-brand-500 focus:border-brand-500 block p-2"
                                                 >
                                                     <option value="employee">Employee</option>
                                                     <option value="manager">Manager</option>
                                                     <option value="admin">Admin</option>
                                                 </select>
-                                                <button onClick={() => saveRole(user._id)} className="text-green-600 font-semibold px-2 hover:underline">Save</button>
-                                                <button onClick={cancelEdit} className="text-slate-500 dark:text-slate-400 px-2 hover:underline">Cancel</button>
+                                                <button onClick={() => saveRole(user._id)} className="text-accent-green dark:text-green-500 font-bold text-[11px] uppercase tracking-widest px-2 hover:bg-green-50 dark:hover:bg-green-900/30 rounded-lg py-1 transition-colors">Save</button>
+                                                <button onClick={cancelEdit} className="text-slate-400 dark:text-slate-500 font-bold text-[11px] uppercase tracking-widest px-2 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg py-1 transition-colors">Cancel</button>
                                             </div>
                                         ) : (
-                                            <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold capitalize border ${user.role === 'admin' ? 'bg-purple-100 text-purple-800 border-purple-200' :
-                                                user.role === 'manager' ? 'bg-blue-100 text-blue-800 border-blue-200' :
-                                                    'bg-slate-100 text-slate-800 border-slate-200 dark:bg-slate-800 dark:text-slate-200 dark:border-slate-700'
+                                            <span className={`inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase border ${user.role === 'admin' ? 'bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 border-purple-200 dark:border-purple-900/50' :
+                                                user.role === 'manager' ? 'bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border-brand-200 dark:border-brand-900/50' :
+                                                    'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border-slate-200 dark:border-slate-700'
                                                 }`}>
-                                                {user.role === 'admin' && <Shield size={12} className="mr-1" />}
-                                                {user.role === 'manager' && <Users size={12} className="mr-1" />}
+                                                {user.role === 'admin' && <Shield size={12} className="mr-1.5" />}
+                                                {user.role === 'manager' && <Users size={12} className="mr-1.5" />}
                                                 {user.role}
                                             </span>
                                         )}
@@ -122,17 +127,17 @@ const AdminDashboard = () => {
                                             <>
                                                 <button
                                                     onClick={() => startEdit(user)}
-                                                    className="text-blue-500 hover:text-blue-700 hover:bg-blue-50 dark:hover:bg-blue-900/30 p-2 rounded-full transition-colors focus:ring-2 focus:outline-none focus:ring-blue-300"
+                                                    className="text-brand-500 hover:text-white hover:bg-brand-500 p-2 rounded-xl transition-colors shrink-0"
                                                     title="Edit Role"
                                                 >
-                                                    <Edit2 size={18} />
+                                                    <Edit2 size={16} />
                                                 </button>
                                                 <button
                                                     onClick={() => handleDelete(user._id)}
-                                                    className="text-red-500 hover:text-red-700 hover:bg-red-50 dark:hover:bg-red-900/30 p-2 rounded-full transition-colors focus:ring-2 focus:outline-none focus:ring-red-300"
+                                                    className="text-accent-red hover:text-white hover:bg-accent-red p-2 rounded-xl transition-colors shrink-0"
                                                     title="Delete User"
                                                 >
-                                                    <Trash2 size={18} />
+                                                    <Trash2 size={16} />
                                                 </button>
                                             </>
                                         )}
@@ -142,8 +147,8 @@ const AdminDashboard = () => {
                         </tbody>
                     </table>
                     {users.length === 0 && (
-                        <div className="text-center py-10 text-slate-500 dark:text-slate-400">
-                            No users found in the system.
+                        <div className="text-center py-16">
+                            <p className="text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest text-[11px]">No users found in the system.</p>
                         </div>
                     )}
                 </div>
