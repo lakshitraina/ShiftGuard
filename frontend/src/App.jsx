@@ -16,8 +16,7 @@ import AdminDashboard from './pages/AdminDashboard';
 
 const Layout = ({ children }) => {
     return (
-        <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-slate-950 transition-colors duration-200">
-            <Navbar />
+        <div className="flex flex-col min-h-screen">
             <main className="flex-1 w-full max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
                 {children}
             </main>
@@ -43,40 +42,43 @@ const RootRedirect = () => {
 function AppContent() {
     return (
         <Router>
-            <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
+            <div className="flex flex-col min-h-screen">
+                <Navbar />
+                <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
 
-                {/* Protected Routes */}
-                <Route
-                    path="/employee"
-                    element={
-                        <ProtectedRoute roles={['employee']}>
-                            <Layout><EmployeeDashboard /></Layout>
-                        </ProtectedRoute>
-                    }
-                />
-                <Route
-                    path="/manager"
-                    element={
-                        <ProtectedRoute roles={['manager']}>
-                            <Layout><ManagerDashboard /></Layout>
-                        </ProtectedRoute>
-                    }
-                />
-                <Route
-                    path="/admin"
-                    element={
-                        <ProtectedRoute roles={['admin']}>
-                            <Layout><AdminDashboard /></Layout>
-                        </ProtectedRoute>
-                    }
-                />
+                    {/* Protected Routes */}
+                    <Route
+                        path="/employee"
+                        element={
+                            <ProtectedRoute roles={['employee']}>
+                                <Layout><EmployeeDashboard /></Layout>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/manager"
+                        element={
+                            <ProtectedRoute roles={['manager']}>
+                                <Layout><ManagerDashboard /></Layout>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin"
+                        element={
+                            <ProtectedRoute roles={['admin']}>
+                                <Layout><AdminDashboard /></Layout>
+                            </ProtectedRoute>
+                        }
+                    />
 
-                {/* Base Route Redirect */}
-                <Route path="/" element={<RootRedirect />} />
-                <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
+                    {/* Base Route Redirect */}
+                    <Route path="/" element={<RootRedirect />} />
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
+            </div>
         </Router>
     );
 }

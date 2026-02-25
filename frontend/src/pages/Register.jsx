@@ -47,7 +47,7 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col justify-center sm:px-6 lg:px-8 py-12 transition-colors duration-200">
+        <div className="flex-1 flex flex-col justify-center sm:px-6 lg:px-8 py-12">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="flex justify-center mx-auto text-blue-600 bg-blue-100 dark:bg-blue-900/30 w-16 h-16 rounded-full items-center">
                     <UserPlus size={32} />
