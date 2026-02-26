@@ -21,8 +21,8 @@ import ManagerPayslips from './pages/ManagerPayslips';
 
 const Layout = ({ children }) => {
     return (
-        <div className="flex flex-col min-h-screen">
-            <main className="flex-1 w-full max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        <div className="flex flex-col min-h-screen w-full min-w-0 bg-[#f8f9fa] dark:bg-slate-950">
+            <main className="flex-1 w-full min-w-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 overflow-x-hidden relative">
                 {children}
             </main>
         </div>
@@ -47,7 +47,7 @@ const RootRedirect = () => {
 function AppContent() {
     return (
         <Router>
-            <div className="flex flex-col min-h-screen">
+            <div className="flex flex-col min-h-screen w-full min-w-0 relative">
                 <Navbar />
                 <Routes>
                     <Route path="/login" element={<Login />} />
