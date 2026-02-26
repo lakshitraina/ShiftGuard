@@ -23,7 +23,7 @@ const ManagerReimbursements = () => {
         try {
             const token = localStorage.getItem('token');
             const config = { headers: { Authorization: `Bearer ${token}` } };
-            const { data } = await axios.get('http://localhost:5000/api/reimbursements', config);
+            const { data } = await axios.get('https://shiftguard.onrender.com/api/reimbursements', config);
             setReimbursements(data);
         } catch (error) {
             console.error('Error fetching reimbursements', error);
@@ -38,7 +38,7 @@ const ManagerReimbursements = () => {
             const token = localStorage.getItem('token');
             const config = { headers: { Authorization: `Bearer ${token}` } };
 
-            await axios.put(`http://localhost:5000/api/reimbursements/${id}/status`, {
+            await axios.put(`https://shiftguard.onrender.com/api/reimbursements/${id}/status`, {
                 status,
                 rejectionReason: reason
             }, config);

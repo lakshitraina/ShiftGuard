@@ -13,7 +13,7 @@ const EmployeeAttendance = () => {
 
     // Create configured axios instance
     const api = axios.create({
-        baseURL: 'http://localhost:5000/api',
+        baseURL: 'https://shiftguard.onrender.com/api',
         headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'

@@ -11,7 +11,7 @@ const EmployeePayslips = () => {
     const token = userStr ? JSON.parse(userStr).token : null;
 
     const api = axios.create({
-        baseURL: 'http://localhost:5000/api',
+        baseURL: 'https://shiftguard.onrender.com/api',
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -85,7 +85,7 @@ const EmployeePayslips = () => {
                             </div>
 
                             <a
-                                href={`http://localhost:5000${payslip.fileUrl}`}
+                                href={`https://shiftguard.onrender.com${payslip.fileUrl}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="mt-6 flex items-center justify-center gap-2 w-full bg-slate-50 dark:bg-slate-800 hover:bg-brand-50 dark:hover:bg-brand-900/30 text-slate-700 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 py-3 rounded-full font-bold uppercase tracking-widest text-xs transition-colors border border-slate-100 dark:border-slate-700 hover:border-brand-200 dark:hover:border-brand-900/50"

@@ -16,7 +16,7 @@ const ManagerPayslips = () => {
     const token = userStr ? JSON.parse(userStr).token : null;
 
     const api = axios.create({
-        baseURL: 'http://localhost:5000/api',
+        baseURL: 'https://shiftguard.onrender.com/api',
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -72,7 +72,7 @@ const ManagerPayslips = () => {
         formData.append('payslip', file);
 
         try {
-            await axios.post('http://localhost:5000/api/payslips', formData, {
+            await axios.post('https://shiftguard.onrender.com/api/payslips', formData, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'
