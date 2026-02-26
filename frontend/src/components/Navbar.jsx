@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { ThemeContext } from '../context/ThemeContext';
-import { LogOut, User as UserIcon, Calendar, Moon, Sun, Menu } from 'lucide-react';
+import { LogOut, User as UserIcon, Calendar, Moon, Sun, Menu, X } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext);
     const { theme, toggleTheme } = useContext(ThemeContext);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -57,7 +58,16 @@ const Navbar = () => {
 
                     {/* Theme Toggle & Notifications - Light mode focus, keeping toggle for functionality if needed but styling it light */}
                     <div className="flex items-center gap-3 text-slate-400 dark:text-slate-500">
-                        <button className="hover:text-slate-700 dark:hover:text-slate-300 transition-colors">
+                        {user && (
+                            <button
+                                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                                className="md:hidden p-2 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors text-slate-700 dark:text-slate-300"
+                                aria-label="Toggle mobile menu"
+                            >
+                                {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+                            </button>
+                        )}
+                        <button className="hover:text-slate-700 dark:hover:text-slate-300 transition-colors hidden sm:block">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" /><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" /></svg>
                         </button>
                         <button
@@ -99,6 +109,33 @@ const Navbar = () => {
                 </div>
 
             </div>
+
+            {/* Mobile Navigation Menu */}
+            {user && isMobileMenuOpen && (
+                <div className="md:hidden mt-4 pt-4 border-t border-slate-200 dark:border-slate-800 space-y-4">
+                    {user.role === 'admin' && (
+                        <div className="flex flex-col gap-4 px-2">
+                            <Link to="/admin" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium">Users</Link>
+                            <Link to="/admin/reimbursements" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium">Reimbursements</Link>
+                        </div>
+                    )}
+                    {user.role === 'manager' && (
+                        <div className="flex flex-col gap-4 px-2">
+                            <Link to="/manager" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium flex items-center gap-2"><Calendar size={18} /> Team Leaves</Link>
+                            <Link to="/manager/reimbursements" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium">Reimbursements</Link>
+                            <Link to="/manager/payslips" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium">Payslips</Link>
+                        </div>
+                    )}
+                    {user.role === 'employee' && (
+                        <div className="flex flex-col gap-4 px-2">
+                            <Link to="/employee" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium flex items-center gap-2"><Calendar size={18} /> My Leaves</Link>
+                            <Link to="/employee/reimbursements" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium">Reimbursements</Link>
+                            <Link to="/employee/attendance" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium">Attendance</Link>
+                            <Link to="/employee/payslips" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium">Payslips</Link>
+                        </div>
+                    )}
+                </div>
+            )}
         </nav>
     );
 };

@@ -78,16 +78,16 @@ const AdminDashboard = () => {
                     <table className="w-full text-left text-sm text-slate-600 dark:text-slate-300">
                         <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase font-bold tracking-widest text-[10px] border-b border-slate-100 dark:border-slate-800">
                             <tr>
-                                <th scope="col" className="px-6 py-5 rounded-tl-3xl">Name</th>
-                                <th scope="col" className="px-6 py-5">Email</th>
-                                <th scope="col" className="px-6 py-5">Current Role</th>
-                                <th scope="col" className="px-6 py-5 text-center">Actions</th>
+                                <th scope="col" className="px-6 py-5 rounded-tl-3xl whitespace-nowrap">Name</th>
+                                <th scope="col" className="px-6 py-5 whitespace-nowrap">Email</th>
+                                <th scope="col" className="px-6 py-5 whitespace-nowrap">Current Role</th>
+                                <th scope="col" className="px-6 py-5 text-center whitespace-nowrap">Actions</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-50 dark:divide-slate-800/50">
                             {users.map((user) => (
                                 <tr key={user._id} className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
-                                    <td className="px-6 py-4 font-bold text-slate-900 dark:text-white">
+                                    <td className="px-6 py-4 font-bold text-slate-900 dark:text-white whitespace-nowrap">
                                         <div className="flex items-center gap-3">
                                             <div className="w-8 h-8 rounded-full overflow-hidden bg-slate-200 dark:bg-slate-700 shrink-0">
                                                 <img src={`https://ui-avatars.com/api/?name=${user.name}&background=f1f5f9&color=0f172a`} alt="Avatar" className="w-full h-full object-cover dark:opacity-80" />
@@ -95,8 +95,8 @@ const AdminDashboard = () => {
                                             {user.name}
                                         </div>
                                     </td>
-                                    <td className="px-6 py-4 font-medium text-slate-500 dark:text-slate-400">{user.email}</td>
-                                    <td className="px-6 py-4">
+                                    <td className="px-6 py-4 font-medium text-slate-500 dark:text-slate-400 whitespace-nowrap">{user.email}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
                                         {editingUserId === user._id ? (
                                             <div className="flex items-center gap-2">
                                                 <select
@@ -122,7 +122,7 @@ const AdminDashboard = () => {
                                             </span>
                                         )}
                                     </td>
-                                    <td className="px-6 py-4 flex items-center justify-center gap-3">
+                                    <td className="px-6 py-4 flex items-center justify-center gap-3 whitespace-nowrap">
                                         {editingUserId !== user._id && (
                                             <>
                                                 <button
