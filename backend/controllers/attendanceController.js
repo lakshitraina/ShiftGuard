@@ -5,15 +5,16 @@ import Attendance from '../models/Attendance.js';
 // @access  Private
 export const markAttendance = async (req, res) => {
     try {
-        const currentDate = new Date();
-        const currentHour = currentDate.getHours();
+        // Get current hour in IST timezone (Asia/Kolkata)
+        const currentHour = parseInt(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata', hour: 'numeric', hour12: false }));
 
         // Check window (9 AM to 5 PM)
         if (currentHour < 9 || currentHour >= 17) {
             return res.status(400).json({ message: 'Attendance can only be marked between 09:00 AM and 05:00 PM.' });
         }
 
-        const dateString = currentDate.toISOString().split('T')[0];
+        // Get date string in YYYY-MM-DD format for IST timezone
+        const dateString = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
 
         // Check if already marked for today
         const existingAttendance = await Attendance.findOne({
