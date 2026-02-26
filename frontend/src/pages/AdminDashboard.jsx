@@ -73,8 +73,8 @@ const AdminDashboard = () => {
                 </div>
             )}
 
-            <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-soft dark:shadow-none border border-slate-100 dark:border-slate-800 overflow-hidden">
-                <div className="overflow-x-auto">
+            <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-soft dark:shadow-none border border-slate-100 dark:border-slate-800 overflow-hidden w-full min-w-0">
+                <div className="overflow-x-auto w-full">
                     <table className="w-full text-left text-sm text-slate-600 dark:text-slate-300">
                         <thead className="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 uppercase font-bold tracking-widest text-[10px] border-b border-slate-100 dark:border-slate-800">
                             <tr>

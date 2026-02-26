@@ -99,7 +99,7 @@ const EmployeeAttendance = () => {
                 </div>
             )}
 
-            <div className="bg-white dark:bg-slate-900 shadow-soft dark:shadow-none rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-800 transition-all duration-200">
+            <div className="bg-white dark:bg-slate-900 shadow-soft dark:shadow-none rounded-3xl overflow-hidden border border-slate-100 dark:border-slate-800 transition-all duration-200 w-full min-w-0">
                 <div className="px-8 py-6 border-b border-slate-100 dark:border-slate-800 flex items-center gap-3">
                     <div className="p-2 bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 rounded-xl">
                         <Calendar size={20} />
