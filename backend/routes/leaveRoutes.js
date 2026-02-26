@@ -5,8 +5,8 @@ import { authorize as roleAuthorize } from '../middleware/roleMiddleware.js';
 
 const router = express.Router();
 
-router.post('/', protect, roleAuthorize('employee'), applyLeave);
-router.get('/my', protect, roleAuthorize('employee'), getMyLeaves);
+router.post('/', protect, applyLeave);
+router.get('/my', protect, getMyLeaves);
 router.get('/', protect, roleAuthorize('admin', 'manager'), getAllLeaves);
 router.put('/:id/status', protect, roleAuthorize('admin', 'manager'), updateLeaveStatus);
 

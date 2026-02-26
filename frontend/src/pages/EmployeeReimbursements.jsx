@@ -18,7 +18,7 @@ const EmployeeReimbursements = () => {
         try {
             const token = localStorage.getItem('token');
             const config = { headers: { Authorization: `Bearer ${token}` } };
-            const { data } = await axios.get('https://shiftguard.onrender.com/api/reimbursements', config);
+            const { data } = await axios.get('https://shiftguard.onrender.com/api/reimbursements/my', config);
             setReimbursements(data);
         } catch (error) {
             console.error('Error fetching reimbursements', error);

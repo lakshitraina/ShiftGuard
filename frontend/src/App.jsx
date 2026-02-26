@@ -112,11 +112,53 @@ function AppContent() {
                         }
                     />
 
+                    {/* Manager Self-Service Routes */}
+                    <Route
+                        path="/manager/my-leaves"
+                        element={
+                            <ProtectedRoute roles={['manager']}>
+                                <Layout><EmployeeDashboard /></Layout>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/manager/my-reimbursements"
+                        element={
+                            <ProtectedRoute roles={['manager']}>
+                                <Layout><EmployeeReimbursements /></Layout>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/manager/my-attendance"
+                        element={
+                            <ProtectedRoute roles={['manager']}>
+                                <Layout><EmployeeAttendance /></Layout>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/manager/my-payslips"
+                        element={
+                            <ProtectedRoute roles={['manager']}>
+                                <Layout><EmployeePayslips /></Layout>
+                            </ProtectedRoute>
+                        }
+                    />
+
                     <Route
                         path="/admin"
                         element={
                             <ProtectedRoute roles={['admin']}>
                                 <Layout><AdminDashboard /></Layout>
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/admin/leaves"
+                        element={
+                            <ProtectedRoute roles={['admin']}>
+                                <Layout><ManagerDashboard /></Layout>
                             </ProtectedRoute>
                         }
                     />

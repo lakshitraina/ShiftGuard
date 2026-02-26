@@ -32,14 +32,27 @@ const Navbar = () => {
                         {user.role === 'admin' && (
                             <>
                                 <Link to="/admin" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">Users</Link>
+                                <Link to="/admin/leaves" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">Leave Approvals</Link>
                                 <Link to="/admin/reimbursements" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">Reimbursements</Link>
                             </>
                         )}
                         {user.role === 'manager' && (
                             <>
-                                <Link to="/manager" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors"><Calendar size={16} /> Team Leaves</Link>
-                                <Link to="/manager/reimbursements" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">Reimbursements</Link>
-                                <Link to="/manager/payslips" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">Payslips</Link>
+                                {/* Team Links */}
+                                <div className="flex items-center gap-4 border-r border-slate-200 dark:border-slate-700 pr-5 py-1">
+                                    <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest hidden lg:block">Team</span>
+                                    <Link to="/manager" className="text-slate-500 dark:text-slate-400 hover:text-brand-600 dark:hover:text-brand-400 font-medium text-sm flex items-center gap-1.5 transition-colors">Leaves</Link>
+                                    <Link to="/manager/reimbursements" className="text-slate-500 dark:text-slate-400 hover:text-brand-600 dark:hover:text-brand-400 font-medium text-sm flex items-center gap-1.5 transition-colors">Claims</Link>
+                                    <Link to="/manager/payslips" className="text-slate-500 dark:text-slate-400 hover:text-brand-600 dark:hover:text-brand-400 font-medium text-sm flex items-center gap-1.5 transition-colors">Payslips</Link>
+                                </div>
+                                {/* Personal Links */}
+                                <div className="flex items-center gap-4 pl-1">
+                                    <span className="text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest hidden lg:block">Me</span>
+                                    <Link to="/manager/my-leaves" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-1.5 transition-colors">Leaves</Link>
+                                    <Link to="/manager/my-reimbursements" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-1.5 transition-colors">Claims</Link>
+                                    <Link to="/manager/my-attendance" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-1.5 transition-colors">Attnd.</Link>
+                                    <Link to="/manager/my-payslips" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-1.5 transition-colors">Payslips</Link>
+                                </div>
                             </>
                         )}
                         {user.role === 'employee' && (
@@ -116,14 +129,22 @@ const Navbar = () => {
                     {user.role === 'admin' && (
                         <div className="flex flex-col gap-4 px-2">
                             <Link to="/admin" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium">Users</Link>
+                            <Link to="/admin/leaves" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium">Leave Approvals</Link>
                             <Link to="/admin/reimbursements" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium">Reimbursements</Link>
                         </div>
                     )}
                     {user.role === 'manager' && (
                         <div className="flex flex-col gap-4 px-2">
-                            <Link to="/manager" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium flex items-center gap-2"><Calendar size={18} /> Team Leaves</Link>
-                            <Link to="/manager/reimbursements" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium">Reimbursements</Link>
-                            <Link to="/manager/payslips" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium">Payslips</Link>
+                            <p className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-2">Team Actions</p>
+                            <Link to="/manager" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium flex items-center gap-2 ml-2">Approve Leaves</Link>
+                            <Link to="/manager/reimbursements" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium flex items-center gap-2 ml-2">Approve Claims</Link>
+                            <Link to="/manager/payslips" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium flex items-center gap-2 ml-2">Upload Payslips</Link>
+
+                            <p className="text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest mt-4">Personal</p>
+                            <Link to="/manager/my-leaves" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium flex items-center gap-2 ml-2">My Leaves</Link>
+                            <Link to="/manager/my-reimbursements" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium flex items-center gap-2 ml-2">My Reimbursements</Link>
+                            <Link to="/manager/my-attendance" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium flex items-center gap-2 ml-2">My Attendance</Link>
+                            <Link to="/manager/my-payslips" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium flex items-center gap-2 ml-2">My Payslips</Link>
                         </div>
                     )}
                     {user.role === 'employee' && (

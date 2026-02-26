@@ -23,23 +23,30 @@ const applyReimbursement = async (req, res) => {
     }
 };
 
-// @desc    Get user's own reimbursements OR all reimbursements (managers/admins)
+// @desc    Get user's own reimbursements
+// @route   GET /api/reimbursements/my
+// @access  Private
+const getMyReimbursements = async (req, res) => {
+    try {
+        const reimbursements = await Reimbursement.find({ employeeId: req.user._id })
+            .populate('employeeId', 'name email')
+            .populate('approvedBy', 'name');
+
+        res.status(200).json(reimbursements);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching my reimbursements', error: error.message });
+    }
+};
+
+// @desc    Get all reimbursements (managers/admins)
 // @route   GET /api/reimbursements
 // @access  Private
 const getReimbursements = async (req, res) => {
     try {
-        let reimbursements;
-
-        if (req.user.role === 'employee') {
-            reimbursements = await Reimbursement.find({ employeeId: req.user._id })
-                .populate('employeeId', 'name email')
-                .populate('approvedBy', 'name');
-        } else {
-            // Managers and Admins see all reimbursements
-            reimbursements = await Reimbursement.find({})
-                .populate('employeeId', 'name email role')
-                .populate('approvedBy', 'name');
-        }
+        // Managers and Admins see all reimbursements
+        reimbursements = await Reimbursement.find({})
+            .populate('employeeId', 'name email role')
+            .populate('approvedBy', 'name');
 
         res.status(200).json(reimbursements);
     } catch (error) {
@@ -81,6 +88,7 @@ const updateReimbursementStatus = async (req, res) => {
 
 export {
     applyReimbursement,
+    getMyReimbursements,
     getReimbursements,
     updateReimbursementStatus
 };
