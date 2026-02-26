@@ -44,7 +44,7 @@ const getMyReimbursements = async (req, res) => {
 const getReimbursements = async (req, res) => {
     try {
         // Managers and Admins see all reimbursements
-        reimbursements = await Reimbursement.find({})
+        const reimbursements = await Reimbursement.find({})
             .populate('employeeId', 'name email role')
             .populate('approvedBy', 'name');
 

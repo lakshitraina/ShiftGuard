@@ -3,12 +3,18 @@ import { AuthContext } from '../context/AuthContext';
 import { ThemeContext } from '../context/ThemeContext';
 import { LogOut, User as UserIcon, Calendar, Moon, Sun, Menu, X } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import api from '../api/axios';
 
 const Navbar = () => {
-    const { user, logout } = useContext(AuthContext);
+    const { user, logout, updateUser } = useContext(AuthContext);
     const { theme, toggleTheme } = useContext(ThemeContext);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const navigate = useNavigate();
+
+    // Edit Profile State
+    const [showProfileModal, setShowProfileModal] = useState(false);
+    const [editName, setEditName] = useState('');
+    const [savingProfile, setSavingProfile] = useState(false);
 
     const handleLogout = () => {
         logout();
@@ -34,6 +40,7 @@ const Navbar = () => {
                                 <Link to="/admin" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">Users</Link>
                                 <Link to="/admin/leaves" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">Leave Approvals</Link>
                                 <Link to="/admin/reimbursements" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">Reimbursements</Link>
+                                <Link to="/admin/payslips" className="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white font-medium text-sm flex items-center gap-2 transition-colors">Payslips</Link>
                             </>
                         )}
                         {user.role === 'manager' && (
@@ -95,7 +102,11 @@ const Navbar = () => {
                     {/* Profile Dropdown logic (Only if logged in) */}
                     {user ? (
                         <div className="flex items-center gap-3 bg-white dark:bg-slate-900 shadow-soft dark:shadow-none rounded-full pl-2 pr-4 py-1.5 border border-slate-100 dark:border-slate-800">
-                            <div className="flex items-center gap-2">
+                            <div
+                                className="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+                                onClick={() => { setEditName(user.name); setShowProfileModal(true); }}
+                                title="Edit Profile"
+                            >
                                 <div className="w-8 h-8 rounded-full overflow-hidden bg-slate-200 dark:bg-slate-700 shrink-0">
                                     <img src={`https://ui-avatars.com/api/?name=${user.name}&background=f1f5f9&color=0f172a`} alt="Avatar" className="w-full h-full object-cover dark:opacity-80" />
                                 </div>
@@ -131,6 +142,7 @@ const Navbar = () => {
                             <Link to="/admin" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium">Users</Link>
                             <Link to="/admin/leaves" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium">Leave Approvals</Link>
                             <Link to="/admin/reimbursements" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium">Reimbursements</Link>
+                            <Link to="/admin/payslips" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium">Payslips</Link>
                         </div>
                     )}
                     {user.role === 'manager' && (
@@ -155,6 +167,64 @@ const Navbar = () => {
                             <Link to="/employee/payslips" onClick={() => setIsMobileMenuOpen(false)} className="text-slate-600 dark:text-slate-300 hover:text-brand-600 dark:hover:text-brand-400 font-medium">Payslips</Link>
                         </div>
                     )}
+                </div>
+            )}
+
+            {/* Edit Profile Modal */}
+            {showProfileModal && user && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/40 dark:bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-200">
+                    <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-xl w-full max-w-sm overflow-hidden border border-slate-100 dark:border-slate-800 animate-in zoom-in-95 duration-200">
+                        <div className="px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+                            <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                                <UserIcon size={18} className="text-brand-500" /> Edit Profile
+                            </h3>
+                            <button onClick={() => setShowProfileModal(false)} className="text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors">
+                                <X size={20} />
+                            </button>
+                        </div>
+                        <div className="p-6">
+                            <form onSubmit={async (e) => {
+                                e.preventDefault();
+                                setSavingProfile(true);
+                                try {
+                                    const { data } = await api.put('/users/profile', { name: editName });
+                                    updateUser({ name: data.name });
+                                    setShowProfileModal(false);
+                                } catch (error) {
+                                    console.error("Failed to update profile", error);
+                                } finally {
+                                    setSavingProfile(false);
+                                }
+                            }} className="space-y-4">
+                                <div>
+                                    <label className="block text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1.5">Full Name</label>
+                                    <input
+                                        type="text"
+                                        required
+                                        value={editName}
+                                        onChange={(e) => setEditName(e.target.value)}
+                                        className="w-full rounded-xl border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white px-4 py-2.5 border focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none font-medium transition-all"
+                                    />
+                                </div>
+                                <div className="pt-2 flex gap-3 justify-end">
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowProfileModal(false)}
+                                        className="px-5 py-2 text-slate-600 dark:text-slate-400 font-bold hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors uppercase tracking-widest text-xs"
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        type="submit"
+                                        disabled={savingProfile || !editName.trim()}
+                                        className="px-6 py-2 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-full transition-all active:scale-95 shadow-sm uppercase tracking-widest text-xs disabled:opacity-50"
+                                    >
+                                        {savingProfile ? 'Saving...' : 'Save'}
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             )}
         </nav>

@@ -17,7 +17,11 @@ export const getUsers = async (req, res) => {
 // @access  Private (Manager/Admin)
 export const getEmployees = async (req, res) => {
     try {
-        const employees = await User.find({ role: 'employee' }).select('-password').sort({ createdAt: -1 });
+        let query = { role: 'employee' };
+        if (req.user && req.user.role === 'admin') {
+            query = { role: { $in: ['employee', 'manager'] } };
+        }
+        const employees = await User.find(query).select('-password').sort({ createdAt: -1 });
         res.json(employees);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -70,6 +74,35 @@ export const deleteUser = async (req, res) => {
 
         await User.deleteOne({ _id: user._id });
         res.json({ message: 'User removed' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+// @desc    Update user profile
+// @route   PUT /api/users/profile
+// @access  Private
+export const updateProfile = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+
+        if (user) {
+            user.name = req.body.name || user.name;
+
+            if (req.body.email) user.email = req.body.email;
+            if (req.body.password) user.password = req.body.password;
+
+            const updatedUser = await user.save();
+
+            res.json({
+                _id: updatedUser._id,
+                name: updatedUser.name,
+                email: updatedUser.email,
+                role: updatedUser.role
+            });
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import { Upload, Users, Calendar, CheckCircle, XCircle } from 'lucide-react';
 
 const ManagerPayslips = () => {
@@ -12,16 +12,6 @@ const ManagerPayslips = () => {
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
 
-    const userStr = localStorage.getItem('user');
-    const token = userStr ? JSON.parse(userStr).token : null;
-
-    const api = axios.create({
-        baseURL: 'https://shiftguard.onrender.com/api',
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    });
-
     useEffect(() => {
         const fetchEmployees = async () => {
             try {
@@ -33,7 +23,7 @@ const ManagerPayslips = () => {
         };
 
         fetchEmployees();
-    }, [token]);
+    }, []);
 
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -72,9 +62,8 @@ const ManagerPayslips = () => {
         formData.append('payslip', file);
 
         try {
-            await axios.post('https://shiftguard.onrender.com/api/payslips', formData, {
+            await api.post('/payslips', formData, {
                 headers: {
-                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'
                 }
             });

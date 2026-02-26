@@ -170,6 +170,14 @@ function AppContent() {
                             </ProtectedRoute>
                         }
                     />
+                    <Route
+                        path="/admin/payslips"
+                        element={
+                            <ProtectedRoute roles={['admin']}>
+                                <Layout><ManagerPayslips /></Layout>
+                            </ProtectedRoute>
+                        }
+                    />
 
                     {/* Base Route Redirect */}
                     <Route path="/" element={<RootRedirect />} />

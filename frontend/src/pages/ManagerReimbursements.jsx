@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import { AuthContext } from '../context/AuthContext';
 import { Check, X, Clock, DollarSign, Search } from 'lucide-react';
 
@@ -21,9 +21,7 @@ const ManagerReimbursements = () => {
 
     const fetchReimbursements = async () => {
         try {
-            const token = localStorage.getItem('token');
-            const config = { headers: { Authorization: `Bearer ${token}` } };
-            const { data } = await axios.get('https://shiftguard.onrender.com/api/reimbursements', config);
+            const { data } = await api.get('/reimbursements');
             setReimbursements(data);
         } catch (error) {
             console.error('Error fetching reimbursements', error);
@@ -35,13 +33,11 @@ const ManagerReimbursements = () => {
     const handleStatusUpdate = async (id, status, reason = '') => {
         try {
             setProcessingId(id);
-            const token = localStorage.getItem('token');
-            const config = { headers: { Authorization: `Bearer ${token}` } };
 
-            await axios.put(`https://shiftguard.onrender.com/api/reimbursements/${id}/status`, {
+            await api.put(`/reimbursements/${id}/status`, {
                 status,
                 rejectionReason: reason
-            }, config);
+            });
 
             if (status === 'rejected') {
                 setShowRejectModal(false);

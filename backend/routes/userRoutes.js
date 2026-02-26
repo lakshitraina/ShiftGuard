@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUsers, getEmployees, updateUserRole, deleteUser } from '../controllers/userController.js';
+import { getUsers, getEmployees, updateUserRole, deleteUser, updateProfile } from '../controllers/userController.js';
 import { protect } from '../middleware/authMiddleware.js';
 import { authorize as roleAuthorize } from '../middleware/roleMiddleware.js';
 
@@ -10,6 +10,9 @@ router.route('/')
 
 router.route('/employees')
     .get(protect, roleAuthorize('admin', 'manager'), getEmployees);
+
+router.route('/profile')
+    .put(protect, updateProfile);
 
 router.route('/:id/role')
     .put(protect, roleAuthorize('admin'), updateUserRole);
