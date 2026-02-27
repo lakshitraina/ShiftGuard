@@ -1,94 +1,99 @@
-# Employee Leave Management System
+# 🛡️ ShiftGuard – Smart Shift & Workforce Management System
 
-A full-stack, real-world simulated Human Resources web application built with the MERN stack (MongoDB, Express, React, Node.js) featuring Role-Based Access Control, JWT authentication, and Tailwind CSS dashboards.
+> **Manage Smarter. Schedule Better. Operate Efficiently.**  
+> ShiftGuard is a modern workforce shift management web application designed to streamline employee scheduling, attendance tracking, and operational workflow.
 
-## Project Overview
+[![Live Demo](https://img.shields.io/badge/Live-Website-brightgreen?style=for-the-badge&logo=netlify)](http://shiftguardd.netlify.app/)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-black?style=for-the-badge&logo=github)](https://github.com/lakshitraina/ShiftGuard)
+[![Frontend](https://img.shields.io/badge/Frontend-React-blue?style=for-the-badge&logo=react)]()
+[![Styling](https://img.shields.io/badge/UI-TailwindCSS-38B2AC?style=for-the-badge&logo=tailwindcss)]()
 
-This application simulates a company workflow where employees can request time off, managers can approve or reject those requests, and administrators can manage user roles and system access.
+---
 
-### Key Features
-*   **Role-Based Dashboards**: Distinct interfaces and capabilities for `employee`, `manager`, and `admin` roles.
-*   **Secure Authentication**: JWT-based authentication with bcrypt password hashing.
-*   **Interactive UI**: Modern, responsive design using React and Tailwind CSS.
-*   **State Management**: React Context API for global state.
-*   **API Security**: Express middleware for route protection and role authorization.
+## 📌 Overview
 
-## Tech Stack
-*   **Frontend**: React (Vite), React Router DOM, Tailwind CSS, Lucide React (Icons), Axios, Context API.
-*   **Backend**: Node.js, Express.js, MongoDB (Mongoose), JWT (JSON Web Tokens), bcryptjs.
+**ShiftGuard** is a workforce management system built to simplify employee shift allocation and improve scheduling efficiency.
 
-## Folder Structure
+It provides:
+- Smart shift planning
+- Clean dashboard interface
+- Organized workforce tracking
+- Modern responsive UI
 
-```
-LeaveSystem/
-├── backend/
-│   ├── config/          # DB connection setup
-│   ├── controllers/     # Route logic (Auth, Leave, User)
-│   ├── middleware/      # Auth & Role verification handlers
-│   ├── models/          # Mongoose DB Schemas
-│   ├── routes/          # API endpoint definitions
-│   ├── server.js        # Entry point
-│   ├── seed.js          # DB seeding script
-│   └── package.json
-└── frontend/
-    ├── src/
-    │   ├── api/         # Axios instance setup
-    │   ├── components/  # Reusable UI (Navbar, Sidebar, Cards)
-    │   ├── context/     # Global auth state provider
-    │   ├── pages/       # Dashboard & Auth views
-    │   ├── App.jsx      # Router & Layout configuration
-    │   └── main.jsx
-    ├── index.html
-    ├── tailwind.config.js
-    └── package.json
-```
+This project demonstrates real-world dashboard design, state management, and responsive frontend architecture.
 
-## Setup Instructions
+---
 
-### Prerequisites
-*   Node.js installed
-*   MongoDB installed locally or a MongoDB Atlas URI
+## ✨ Key Features
 
-### 1. Backend Setup
-1.  Navigate to the backend directory: `cd backend`
-2.  Install dependencies: `npm install`
-3.  Configure environment variables (see `.env Example` below).
-4.  (Optional) Seed database with mock users: `node seed.js`
-5.  Start the development server: `npm run dev`
+### 📅 Shift Scheduling
+- Create and manage employee shifts
+- Organized scheduling interface
 
-### 2. Frontend Setup
-1.  Navigate to the frontend directory: `cd frontend`
-2.  Install dependencies: `npm install`
-3.  Start the development server: `npm run dev`
+### 📊 Dashboard Overview
+- Quick insights into workforce allocation
+- Structured and easy-to-read UI
 
-## .env Example (Backend)
-Create a `.env` file in the `backend/` directory with the following variables:
+### 👥 Employee Management
+- Assign roles and shifts efficiently
+- Maintain organized records
 
-```env
-PORT=5000
-MONGO_URI=mongodb://127.0.0.1:27017/leave-management
-JWT_SECRET=your_super_secret_jwt_key
-```
+### 📱 Responsive Design
+- Optimized for Desktop, Tablet, and Mobile
+- Clean Tailwind-based layout
 
-## API Endpoints List
+---
 
-### Authentication
-*   `POST /api/auth/register` - Register a new user
-*   `POST /api/auth/login` - Authenticate user & get token
+## 🛠️ Tech Stack
 
-### Leave Management
-*   `POST /api/leave` - Apply for leave (Employee)
-*   `GET /api/leave/my` - Get logged-in user's leaves (Employee)
-*   `GET /api/leave` - Get all leaves (Manager/Admin)
-*   `PUT /api/leave/:id/status` - Approve/Reject leave (Manager/Admin)
+- **Frontend:** React (Vite)
+- **Styling:** Tailwind CSS
+- **Routing:** React Router
+- **Deployment:** Netlify
+- **Version Control:** Git & GitHub
 
-### User Management (Admin Only)
-*   `GET /api/users` - Get all registered users
-*   `PUT /api/users/:id/role` - Update a user's role
-*   `DELETE /api/users/:id` - Remove a user
+---
 
-## Testing Users
-If you ran `node seed.js`, you can log in with:
-*   **Admin:** `admin@company.com` / `password123`
-*   **Manager:** `manager@company.com` / `password123`
-*   **Employee:** `employee1@company.com` / `password123`
+## 🚀 Live Demo
+
+🌐 Visit here:  
+http://shiftguardd.netlify.app/
+
+---
+
+---
+
+## 🧠 Learning Highlights
+
+- Dashboard UI architecture
+- Component-based React structure
+- Responsive design using Tailwind
+- Frontend state management
+- Real-world workforce workflow simulation
+
+---
+
+## 🎯 Future Enhancements
+
+- Backend integration for persistent data
+- Role-based access control
+- Authentication system
+- Analytics with charts
+- Exportable shift reports
+
+---
+
+## 👨‍💻 Author
+
+**Lakshit Raina**  
+GitHub: https://github.com/lakshitraina  
+
+---
+
+## ⭐ Support
+
+If you found this project useful, consider giving it a **star ⭐** on GitHub.
+
+---
+
+**Built with ❤️ using React & Tailwind**
